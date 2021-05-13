@@ -1,7 +1,7 @@
 {
   "name": "ultrawide-support",
   "version": "0.1.0",
-  "description": "A tool to battle windowboxing on ultrawide monitors",
+  "description": "A tool to battle windowboxing on ultrawide displays",
   "scripts": {
     "build": "webpack-dev-server",
     "build:prod": "webpack -p"
