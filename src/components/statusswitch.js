@@ -6,7 +6,7 @@ import { CgScreenWide } from 'react-icons/cg';
 
 const queryOptions = { active: true, currentWindow: true };
 
-const StatusSwitch = (props) => {
+const StatusSwitch = props => {
   const [status, setStatus] = React.useState(props.status.status.get());
 
   const handleToggle = (event, value) => {

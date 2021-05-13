@@ -10,12 +10,12 @@ import Theme from './theme';
 const Foreground = () => {
   const container = document.querySelector('.uws-foreground').parentElement;
   const video = document.querySelector('video');
-  const minValue = Math.round(video.videoWidth / video.videoHeight * 100) / 100 - 0.01;
-  const maxValue = Math.round(screen.width / screen.height * 100) / 100 + 0.01;
+  const maxValue = Math.round(screen.width / screen.height * 100) / 100;
 
+  const [minValue, setMinValue] = React.useState(Math.round(video.videoWidth / video.videoHeight * 100) / 100);
   const [visible, setVisible] = React.useState(false);
   const [value, setValue] = React.useState(minValue);
-
+  
   const handleChange = (event, value) => {
     if (minValue < value && value < maxValue) {
       setValue(value);
@@ -30,6 +30,11 @@ const Foreground = () => {
     const scale = Math.round(value / minValue * 100);
     video.parentElement.setAttribute('style', `height: ${scale}% !important; transform: translateY(-${50 * (scale - 100) / scale}%) !important;`);
   }, [value]);
+
+  video.addEventListener('loadedmetadata', () => {
+    setMinValue(Math.round(video.videoWidth / video.videoHeight * 100) / 100);
+    setValue(Math.round(video.videoWidth / video.videoHeight * 100) / 100);
+  });
 
   container.addEventListener('mousemove', () => {
     resetTimer();
@@ -92,6 +97,7 @@ const Foreground = () => {
                       orientation="vertical"
                       style={{ height: 200 }}
                       marks={marks}
+                      valueLabelDisplay="off"
                     />
                   </Box>
                   <Box m={1}>
